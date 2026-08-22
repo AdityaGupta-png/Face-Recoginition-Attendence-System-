@@ -1,4 +1,5 @@
 
+######################################################  DAY ONE  ############################################
 1 --> main file 
 import tkinter --> for making the powerful Gui--> Graphical user interface 
 ttk --> iske andar stylish toolkit hote hai 
@@ -22,3 +23,5 @@ creating the FACE RECOGNITION ATTENDENCE SYSTEM root window
             f --> Photos 
             g --> Developer option 
             h ---> Exit button --> redirect to the login page 
+
+############# HERE FACE RECOGINTION ATTEDENCE SYSTEM PAGE AND 8 BUTTTON ARE ADDED" ###############
