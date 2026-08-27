@@ -25,3 +25,19 @@ creating the FACE RECOGNITION ATTENDENCE SYSTEM root window
             h ---> Exit button --> redirect to the login page 
 
 ############# HERE FACE RECOGINTION ATTEDENCE SYSTEM PAGE AND 8 BUTTTON ARE ADDED" ###############
+
+2 --> Making the student details page 
+        Here We Make the Main frame and divide into 2 frames 
+            a --> left side frame 
+            b --> Right side frame 
+
+        1. Left side Frame --> Divide into more 3 frame 
+            a --> Student Deatails 
+            b --> Current course information 
+            c --> Class student information 
+
+        
+
+
+
+ 
