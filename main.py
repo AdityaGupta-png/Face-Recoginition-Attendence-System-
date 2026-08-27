@@ -141,15 +141,7 @@ class Face_Recoginition_System:
         b1_2 = Button(bg_img,text="Exit",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 960,y= 475,width=200,height=35)
         
-        
-        
-        
-        
 
-        
-        
-        
-        
         
 # Making object 
 if __name__ == "__main__":
