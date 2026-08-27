@@ -60,7 +60,7 @@ class StudentDetails:
         
         # Left Side Label Frame 
         left_frame = LabelFrame(main_frame,bd=2,bg="white",relief=RIDGE,text="Student Details"
-                                ,font=("times new roman",12,"bold"))
+                                ,font=("times new roman",10,"bold"))
         left_frame.place(x=0,y=0,width=700,height=460)
         
         # Adding images to the left frames 
@@ -73,8 +73,8 @@ class StudentDetails:
         
         # Cousre information 
         cousre_info = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE,text="Current Course Infomation"
-                                ,font=("times new roman",12,"bold"))
-        cousre_info.place(x=0,y=125,width=695,height=90)
+                                ,font=("times new roman",10,"bold"))
+        cousre_info.place(x=0,y=125,width=695,height=95)
         
         # Making the comboBox inside the Course Information 
         # 1---> For the Department 
@@ -136,13 +136,78 @@ class StudentDetails:
         semester_combo.current(0)
         semester_combo.grid(row=1,column=3,padx=20,pady=5)
         
+        # Making another label name as the class student information taken 
+        Class_Student_frame = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE,text="Class Student Information"
+                                ,font=("times new roman",10,"bold"))
+        Class_Student_frame.place(x=0,y=220,width=695,height=150)
+        
+        # 1 --> Entry fill name as Student Name 
+        studentName_label = Label(Class_Student_frame,text="Student Name:",font=("times new roman",12,"bold"),bg="white")
+        studentName_label.grid(row=0,column=0,padx=5,pady=5)
+        
+        StudentName_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        StudentName_entry.grid(row=0,column=1,padx=10,pady=5)
+        
+        # 2 --> Entry fill for the studentId 
+        studentId_label = Label(Class_Student_frame,text="StudentId:",font=("times new roman",12,"bold"),bg="white")
+        studentId_label.grid(row=0,column=2,padx=20,pady=5)
+        
+        studentId_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        studentId_entry.grid(row=0,column=3,padx=10,pady=5)
+        
+        # 3 --> For the roll no 
+        rollNo_label = Label(Class_Student_frame,text="RollNo.:",font=("times new roman",12,"bold"),bg="white")
+        rollNo_label.grid(row=1,column=0,padx=5,pady=5)
+        
+        rollNo_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        rollNo_entry.grid(row=1,column=1,padx=10,pady=5)
+        
+        # 4 --> FOR the Date of birth
+        DOB_label = Label(Class_Student_frame,text="DOB:",font=("times new roman",12,"bold"),bg="white")
+        DOB_label.grid(row=1,column=2,padx=20,pady=5)
+        
+        DOB_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        DOB_entry.grid(row=1,column=3,padx=10,pady=5)
+        
+        # 5 --> Entry fill for the division 
+        division_label = Label(Class_Student_frame,text="Division:",font=("times new roman",12,"bold"),bg="white")
+        division_label.grid(row=2,column=0,padx=5,pady=5)
+        
+        division_combo = ttk.Combobox(Class_Student_frame,font=("times new roman",12,"bold"),width=17,state="readonly")
+        division_combo["values"] = ("Select Divion",
+                                    "A",
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E")
+        division_combo.current(0)
+        division_combo.grid(row=2,column=1,padx=10,pady=5)
+        
+        # 6 --> Entry fill for the gender 
+        gender_label = Label(Class_Student_frame,text="Gender:",font=("times new roman",12,"bold"),bg="white")
+        gender_label.grid(row=2,column=2,padx=10,pady=5)
+        
+        gender_combo = ttk.Combobox(Class_Student_frame,font=("times new roman",12,"bold"),width=17,state="readonly")
+        gender_combo["values"] = ("Select Gender",
+                                  "Male",
+                                  "Female",
+                                  "Other")
+        gender_combo.current(0)
+        gender_combo.grid(row=2,column=3,padx=10,pady=5)
+        
+        
+
+        
+        # Gender fill 
+        
+        
         
         
         
         
         # Right side Label Frame 
         right_frame = LabelFrame(main_frame,bd=2,bg="white",relief=RIDGE,text="Student Details"
-                                ,font=("times new roman",12,"bold"))
+                                ,font=("times new roman",10,"bold"))
         right_frame.place(x=705,y=0,width=560,height=460)
         
         
