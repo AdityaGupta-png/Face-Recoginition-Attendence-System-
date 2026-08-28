@@ -195,15 +195,19 @@ class StudentDetails:
         gender_combo.current(0)
         gender_combo.grid(row=2,column=3,padx=10,pady=5)
         
+        # Making the radio buttons 
+        # Radio Buttons 1
+        radiobutton_1 = ttk.Radiobutton(Class_Student_frame,text="Take Photo Sample",value="Yes")
+        radiobutton_1.grid(row=3,column=0,padx=10,pady=5)
         
-
+        # Radio Buttons 2 
+        radiobutton_2 = ttk.Radiobutton(Class_Student_frame,text="No Photo Sample",value="No")
+        radiobutton_2.grid(row=3,column=1,padx=10,pady=5)
         
-        # Gender fill 
+        # Making the another frame for the buttons 
         
-        
-        
-        
-        
+        button_frame = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE)
+        button_frame.place(x=0,y=375,width=695,height=65)
         
         # Right side Label Frame 
         right_frame = LabelFrame(main_frame,bd=2,bg="white",relief=RIDGE,text="Student Details"
