@@ -74,12 +74,12 @@ class StudentDetails:
         # Cousre information 
         cousre_info = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE,text="Current Course Infomation"
                                 ,font=("times new roman",10,"bold"))
-        cousre_info.place(x=0,y=125,width=695,height=95)
+        cousre_info.place(x=0,y=125,width=695,height=80)
         
         # Making the comboBox inside the Course Information 
         # 1---> For the Department 
         dep_label = Label(cousre_info,text="Department",font=("times new roman",12,"bold"),bg="white")
-        dep_label.grid(row=0,column=0,padx=5,pady=5)
+        dep_label.grid(row=0,column=0,padx=5,pady=3)
         
         dep_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
         dep_combo["values"] = ("Select Department",
@@ -90,11 +90,11 @@ class StudentDetails:
                                "Mechanical",
                                "Civil")
         dep_combo.current(0)   # make 0 index as the default values 
-        dep_combo.grid(row=0,column=1,padx=20,pady=5)
+        dep_combo.grid(row=0,column=1,padx=20,pady=3)
         
         # 2--->  for the college year
         currentcollegeYear_label = Label(cousre_info,text="Current College Year",font=("times new roman",12,"bold"),bg="white")
-        currentcollegeYear_label.grid(row=0,column=2,padx=10,pady=5)
+        currentcollegeYear_label.grid(row=0,column=2,padx=10,pady=3)
         
         currentcollegeYear_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
         currentcollegeYear_combo["values"] = ("Select Year",
@@ -103,11 +103,11 @@ class StudentDetails:
                                               "TE",
                                               "BE")
         currentcollegeYear_combo.current(0)  # Make 0 index as the default 
-        currentcollegeYear_combo.grid(row=0,column=3,padx=10,pady=5)
+        currentcollegeYear_combo.grid(row=0,column=3,padx=10,pady=3)
         
         #3 --->  for the year 
         year_label = Label(cousre_info,text="Year",font=("times new roman",12,"bold"),bg="white")
-        year_label.grid(row=1,column=0,padx=5,pady=5)
+        year_label.grid(row=1,column=0,padx=5,pady=3)
         
         year_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
         year_combo["values"] = ("Select Year",
@@ -116,11 +116,11 @@ class StudentDetails:
                                 "2027-28",
                                 "2028-29")
         year_combo.current(0)  # Making the 0 index as the default values 
-        year_combo.grid(row=1,column=1,padx=20,pady=5)
+        year_combo.grid(row=1,column=1,padx=20,pady=3)
         
         #4 -->  For the semester 
         semester_label = Label(cousre_info,text="Semester",font=("times new roman",12,"bold"),bg="white")
-        semester_label.grid(row=1,column=2,padx=10,pady=5)
+        semester_label.grid(row=1,column=2,padx=10,pady=3)
         
         semester_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
         semester_combo["values"] = ("Select Semester",
@@ -134,44 +134,44 @@ class StudentDetails:
                                     "Semester-8"
                                 )
         semester_combo.current(0)
-        semester_combo.grid(row=1,column=3,padx=20,pady=5)
+        semester_combo.grid(row=1,column=3,padx=20,pady=3)
         
         # Making another label name as the class student information taken 
         Class_Student_frame = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE,text="Class Student Information"
                                 ,font=("times new roman",10,"bold"))
-        Class_Student_frame.place(x=0,y=220,width=695,height=150)
+        Class_Student_frame.place(x=0,y=205,width=695,height=145)
         
         # 1 --> Entry fill name as Student Name 
         studentName_label = Label(Class_Student_frame,text="Student Name:",font=("times new roman",12,"bold"),bg="white")
-        studentName_label.grid(row=0,column=0,padx=5,pady=5)
+        studentName_label.grid(row=0,column=0,padx=5,pady=3)
         
         StudentName_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
-        StudentName_entry.grid(row=0,column=1,padx=10,pady=5)
+        StudentName_entry.grid(row=0,column=1,padx=10,pady=3)
         
         # 2 --> Entry fill for the studentId 
         studentId_label = Label(Class_Student_frame,text="StudentId:",font=("times new roman",12,"bold"),bg="white")
-        studentId_label.grid(row=0,column=2,padx=20,pady=5)
+        studentId_label.grid(row=0,column=2,padx=20,pady=3)
         
         studentId_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
-        studentId_entry.grid(row=0,column=3,padx=10,pady=5)
+        studentId_entry.grid(row=0,column=3,padx=10,pady=3)
         
         # 3 --> For the roll no 
         rollNo_label = Label(Class_Student_frame,text="RollNo.:",font=("times new roman",12,"bold"),bg="white")
-        rollNo_label.grid(row=1,column=0,padx=5,pady=5)
+        rollNo_label.grid(row=1,column=0,padx=5,pady=3)
         
         rollNo_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
-        rollNo_entry.grid(row=1,column=1,padx=10,pady=5)
+        rollNo_entry.grid(row=1,column=1,padx=10,pady=3)
         
         # 4 --> FOR the Date of birth
         DOB_label = Label(Class_Student_frame,text="DOB:",font=("times new roman",12,"bold"),bg="white")
-        DOB_label.grid(row=1,column=2,padx=20,pady=5)
+        DOB_label.grid(row=1,column=2,padx=20,pady=3)
         
         DOB_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
-        DOB_entry.grid(row=1,column=3,padx=10,pady=5)
+        DOB_entry.grid(row=1,column=3,padx=10,pady=3)
         
         # 5 --> Entry fill for the division 
         division_label = Label(Class_Student_frame,text="Division:",font=("times new roman",12,"bold"),bg="white")
-        division_label.grid(row=2,column=0,padx=5,pady=5)
+        division_label.grid(row=2,column=0,padx=5,pady=3)
         
         division_combo = ttk.Combobox(Class_Student_frame,font=("times new roman",12,"bold"),width=17,state="readonly")
         division_combo["values"] = ("Select Divion",
@@ -181,11 +181,11 @@ class StudentDetails:
                                     "D",
                                     "E")
         division_combo.current(0)
-        division_combo.grid(row=2,column=1,padx=10,pady=5)
+        division_combo.grid(row=2,column=1,padx=10,pady=3)
         
         # 6 --> Entry fill for the gender 
         gender_label = Label(Class_Student_frame,text="Gender:",font=("times new roman",12,"bold"),bg="white")
-        gender_label.grid(row=2,column=2,padx=10,pady=5)
+        gender_label.grid(row=2,column=2,padx=10,pady=3)
         
         gender_combo = ttk.Combobox(Class_Student_frame,font=("times new roman",12,"bold"),width=17,state="readonly")
         gender_combo["values"] = ("Select Gender",
@@ -193,22 +193,51 @@ class StudentDetails:
                                   "Female",
                                   "Other")
         gender_combo.current(0)
-        gender_combo.grid(row=2,column=3,padx=10,pady=5)
+        gender_combo.grid(row=2,column=3,padx=10,pady=3)
         
         # Making the radio buttons 
         # Radio Buttons 1
         radiobutton_1 = ttk.Radiobutton(Class_Student_frame,text="Take Photo Sample",value="Yes")
-        radiobutton_1.grid(row=3,column=0,padx=10,pady=5)
+        radiobutton_1.grid(row=3,column=0,padx=10,pady=3)
         
         # Radio Buttons 2 
         radiobutton_2 = ttk.Radiobutton(Class_Student_frame,text="No Photo Sample",value="No")
-        radiobutton_2.grid(row=3,column=1,padx=10,pady=5)
+        radiobutton_2.grid(row=3,column=1,padx=10,pady=3)
         
         # Making the another frame for the buttons 
         
         button_frame = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE)
-        button_frame.place(x=0,y=375,width=695,height=65)
+        button_frame.place(x=0,y=350,width=695,height=45)
         
+        # 1 --> Save button
+        save_btn = Button(button_frame,text="Save",width=11,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        save_btn.grid(row=0,column=0,padx=25,pady=5)
+        
+        # 2 --> Update button
+        update_btn = Button(button_frame,text="Update",width=11,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        update_btn.grid(row=0,column=1,padx=25,pady=5)
+        
+        # 3 --> delete button 
+        delete_btn = Button(button_frame,text="Delete",width=11,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        delete_btn.grid(row=0,column=2,padx=25,pady=5)
+        
+        # 4 --> reset button
+        reset_btn = Button(button_frame,text="Reset",width=11,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        reset_btn.grid(row=0,column=3,padx=25,pady=5)
+        
+        # Making the second button frame 
+        button_frame_2 = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE)
+        button_frame_2.place(x=0,y=395,width=695,height=45)
+        
+        # 1 --> Take phtot sample 
+        takePhotoSample_btn = Button(button_frame_2,text="Take Photo Sample",width=25,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        takePhotoSample_btn.grid(row=0,column=0,padx=40,pady=5)
+        
+        # 2 --> Update photo sample 
+        updatePhotoSample_btn = Button(button_frame_2,text="Update Photo Sample",width=25,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        updatePhotoSample_btn.grid(row=0,column=1,padx=40,pady=5)
+        
+    
         # Right side Label Frame 
         right_frame = LabelFrame(main_frame,bd=2,bg="white",relief=RIDGE,text="Student Details"
                                 ,font=("times new roman",10,"bold"))
