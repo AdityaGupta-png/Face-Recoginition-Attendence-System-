@@ -2,6 +2,7 @@
 from tkinter import*
 from tkinter import ttk 
 from PIL import Image,ImageTk
+from StudentDetails import StudentDetails
 
 # Making the class Face_Recogintion attendence system
 class Face_Recoginition_System: 
@@ -54,18 +55,18 @@ class Face_Recoginition_System:
         # Adding buttons to the Background label
         
         # STUDENT DETAILS button 
-        img5 = Image.open(r"Project_Images\Student_Details2.jpg")
+        img5 = Image.open(r"Project_Images\student_details_2.jpg")
         img5 = img5.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_5 = ImageTk.PhotoImage(img5)
         
-        b1 = Button(bg_img,image=self.photoimg_5,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg_5,command=self.Student_details,cursor="hand2")
         b1.place(x= 95,y= 50,width=200,height=180)
         
-        b1_1 = Button(bg_img,text="Student Details",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
+        b1_1 = Button(bg_img,text="Student Details",cursor="hand2",command=self.Student_details,font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_1.place(x= 95,y= 230,width=200,height=35)
         
         # Detect face button 
-        img6 = Image.open(r"Project_Images\Face_Detector_2.jpg")
+        img6 = Image.open(r"Project_Images\student_details_21.jpg")
         img6 = img6.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_6 = ImageTk.PhotoImage(img6)
         
@@ -140,6 +141,14 @@ class Face_Recoginition_System:
         
         b1_2 = Button(bg_img,text="Exit",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 960,y= 475,width=200,height=35)
+        
+        
+        # ====================================== BUTTONS FUNCTION ===========================================
+        
+        # funtion of the student details 
+    def Student_details(self):
+        self.new_window = Toplevel(self.root)
+        self.app = StudentDetails(self.new_window)
         
 
         
