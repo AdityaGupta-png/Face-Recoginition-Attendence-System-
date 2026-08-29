@@ -34,7 +34,36 @@ creating the FACE RECOGNITION ATTENDENCE SYSTEM root window
         1. Left side Frame --> Divide into more 3 frame 
             a --> Student Deatails 
             b --> Current course information 
+                        1. Department ComboBox
+                        2. College Year ComboBox
+                        3. Year ComboBox
+                        4. Semester ComboBox
             c --> Class student information 
+                        1. StudentId entry fill 
+                        2. Student Name entry fill
+                        3. Roll No entry fill 
+                        4. DOB entry fill 
+                        5. Division combo box 
+                        6. Gender combo box 
+            d --> Radio Buttons 
+                        1. Take photo sample Yes or no 
+                        2. No photo sample 
+            e --> Buttons 
+                        1. Save the data 
+                        2. Update the data 
+                        3. Delete the data
+                        4. Reset the data 
+                        5. Take the phot0 sample --> take you 100 photos in sceond 
+                        6. Update photo sample 
+            
+        2. Right side Frame --> Divide into  main frame 
+            a. Add the image 
+            b. Search system 
+                --> We can search student based on their rollNo. and studentId
+            c. Table frame 
+                --> Show all the data related registe student
+                
+
 
         
 
