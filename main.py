@@ -55,7 +55,7 @@ class Face_Recoginition_System:
         # Adding buttons to the Background label
         
         # STUDENT DETAILS button 
-        img5 = Image.open(r"Project_Images\student_details_2.jpg")
+        img5 = Image.open(r"Project_Images\student_details_21.jpg")
         img5 = img5.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_5 = ImageTk.PhotoImage(img5)
         
@@ -66,7 +66,7 @@ class Face_Recoginition_System:
         b1_1.place(x= 95,y= 230,width=200,height=35)
         
         # Detect face button 
-        img6 = Image.open(r"Project_Images\student_details_21.jpg")
+        img6 = Image.open(r"Project_Images\Face_Detector_2.jpg")
         img6 = img6.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_6 = ImageTk.PhotoImage(img6)
         
