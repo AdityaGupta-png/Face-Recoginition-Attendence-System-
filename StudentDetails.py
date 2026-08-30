@@ -2,6 +2,11 @@
 from tkinter import*
 from tkinter import ttk 
 from PIL import Image,ImageTk
+from tkinter import messagebox   # importing the message box 
+import mysql.connector
+
+
+
 
 # Making the class Face_Recogintion attendence system
 class StudentDetails: 
@@ -11,6 +16,18 @@ class StudentDetails:
         self.root = root
         self.root.geometry("1350x700+0+0")
         self.root.title("Face Recoginition Attendence System")
+        
+        # Making the variables 
+        self.var_dep = StringVar()
+        self.var_course = StringVar()
+        self.var_year = StringVar()
+        self.var_sem = StringVar()
+        self.var_id = StringVar()
+        self.var_name = StringVar()
+        self.var_roll = StringVar()
+        self.var_dob = StringVar()
+        self.var_div = StringVar()
+        self.var_gender = StringVar()
         
     # Adding the different images of the same size so we cpoy the code 
         # Added image no 1
@@ -73,7 +90,7 @@ class StudentDetails:
         dep_label = Label(cousre_info,text="Department",font=("times new roman",12,"bold"),bg="white")
         dep_label.grid(row=0,column=0,padx=10,pady=10)
         
-        dep_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
+        dep_combo = ttk.Combobox(cousre_info,textvariable=self.var_dep,font=("times new roman",12,"bold"),width=17,state="readonly")
         dep_combo["values"] = ("Select Department",
                                "Computer Science",
                                "Information Technology",
@@ -88,7 +105,7 @@ class StudentDetails:
         currentcollegeYear_label = Label(cousre_info,text="Current College Year",font=("times new roman",12,"bold"),bg="white")
         currentcollegeYear_label.grid(row=0,column=2,padx=10,pady=10)
         
-        currentcollegeYear_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
+        currentcollegeYear_combo = ttk.Combobox(cousre_info,textvariable=self.var_course,font=("times new roman",12,"bold"),width=17,state="readonly")
         currentcollegeYear_combo["values"] = ("Select Year",
                                               "FE",
                                               "SE",
@@ -101,7 +118,7 @@ class StudentDetails:
         year_label = Label(cousre_info,text="Year",font=("times new roman",12,"bold"),bg="white")
         year_label.grid(row=1,column=0,padx=5,pady=10)
         
-        year_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
+        year_combo = ttk.Combobox(cousre_info,textvariable=self.var_year,font=("times new roman",12,"bold"),width=17,state="readonly")
         year_combo["values"] = ("Select Year",
                                 "2025-26",
                                 "2026-27",
@@ -114,7 +131,7 @@ class StudentDetails:
         semester_label = Label(cousre_info,text="Semester",font=("times new roman",12,"bold"),bg="white")
         semester_label.grid(row=1,column=2,padx=10,pady=10)
         
-        semester_combo = ttk.Combobox(cousre_info,font=("times new roman",12,"bold"),width=17,state="readonly")
+        semester_combo = ttk.Combobox(cousre_info,textvariable=self.var_sem,font=("times new roman",12,"bold"),width=17,state="readonly")
         semester_combo["values"] = ("Select Semester",
                                     "Semester-1",
                                     "Semester-2",
@@ -137,35 +154,35 @@ class StudentDetails:
         studentName_label = Label(Class_Student_frame,text="Student Name:",font=("times new roman",12,"bold"),bg="white")
         studentName_label.grid(row=0,column=2,padx=5,pady=10)
         
-        StudentName_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        StudentName_entry = ttk.Entry(Class_Student_frame,textvariable=self.var_name,width=20,font=("times new roman",12,"bold"))
         StudentName_entry.grid(row=0,column=3,padx=10,pady=10)
         
         # 2 --> Entry fill for the studentId 
         studentId_label = Label(Class_Student_frame,text="StudentId:",font=("times new roman",12,"bold"),bg="white")
         studentId_label.grid(row=0,column=0,padx=20,pady=10)
         
-        studentId_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        studentId_entry = ttk.Entry(Class_Student_frame,textvariable=self.var_id,width=20,font=("times new roman",12,"bold"))
         studentId_entry.grid(row=0,column=1,padx=10,pady=10)
         
         # 3 --> For the roll no 
         rollNo_label = Label(Class_Student_frame,text="RollNo.:",font=("times new roman",12,"bold"),bg="white")
         rollNo_label.grid(row=1,column=0,padx=5,pady=10)
         
-        rollNo_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        rollNo_entry = ttk.Entry(Class_Student_frame,textvariable=self.var_roll,width=20,font=("times new roman",12,"bold"))
         rollNo_entry.grid(row=1,column=1,padx=10,pady=10)
         
         # 4 --> FOR the Date of birth
         DOB_label = Label(Class_Student_frame,text="DOB:",font=("times new roman",12,"bold"),bg="white")
         DOB_label.grid(row=1,column=2,padx=20,pady=10)
         
-        DOB_entry = ttk.Entry(Class_Student_frame,width=20,font=("times new roman",12,"bold"))
+        DOB_entry = ttk.Entry(Class_Student_frame,textvariable=self.var_dob,width=20,font=("times new roman",12,"bold"))
         DOB_entry.grid(row=1,column=3,padx=10,pady=10)
         
         # 5 --> Entry fill for the division 
         division_label = Label(Class_Student_frame,text="Division:",font=("times new roman",12,"bold"),bg="white")
         division_label.grid(row=2,column=0,padx=5,pady=10)
         
-        division_combo = ttk.Combobox(Class_Student_frame,font=("times new roman",12,"bold"),width=17,state="readonly")
+        division_combo = ttk.Combobox(Class_Student_frame,textvariable=self.var_div,font=("times new roman",12,"bold"),width=17,state="readonly")
         division_combo["values"] = ("Select Divion",
                                     "A",
                                     "B",
@@ -179,7 +196,7 @@ class StudentDetails:
         gender_label = Label(Class_Student_frame,text="Gender:",font=("times new roman",12,"bold"),bg="white")
         gender_label.grid(row=2,column=2,padx=10,pady=10)
         
-        gender_combo = ttk.Combobox(Class_Student_frame,font=("times new roman",12,"bold"),width=17,state="readonly")
+        gender_combo = ttk.Combobox(Class_Student_frame,textvariable=self.var_gender,font=("times new roman",12,"bold"),width=17,state="readonly")
         gender_combo["values"] = ("Select Gender",
                                   "Male",
                                   "Female",
@@ -189,20 +206,21 @@ class StudentDetails:
         
         # Making the radio buttons 
         # Radio Buttons 1
-        radiobutton_1 = ttk.Radiobutton(Class_Student_frame,text="Take Photo Sample",value="Yes")
+        self.var_radio = StringVar()
+        radiobutton_1 = ttk.Radiobutton(Class_Student_frame,text="Take Photo Sample",variable=self.var_radio,value="Yes")
         radiobutton_1.grid(row=3,column=0,padx=10,pady=10)
         
         # Radio Buttons 2 
-        radiobutton_2 = ttk.Radiobutton(Class_Student_frame,text="No Photo Sample",value="No")
+        radiobutton_2 = ttk.Radiobutton(Class_Student_frame,text="No Photo Sample",variable=self.var_radio,value="No")
         radiobutton_2.grid(row=3,column=1,padx=10,pady=10)
-        
+    
         # Making the another frame for the buttons 
         
         button_frame = LabelFrame(left_frame,bd=2,bg="white",relief=RIDGE)
         button_frame.place(x=0,y=340,width=665,height=45)
         
         # 1 --> Save button
-        save_btn = Button(button_frame,text="Save",width=13,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        save_btn = Button(button_frame,text="Save",command=self.add_data,width=13,font=("times new roman",13,"bold"),bg="blue",fg="white")
         save_btn.grid(row=0,column=0,padx=12,pady=5)
         
         # 2 --> Update button
@@ -331,6 +349,16 @@ class StudentDetails:
         scroll_y.config(command=self.student_table.yview)
         
         self.student_table.pack(fill=BOTH,expand=1)
+        
+    # ================================ Function declaration ==================================
+    def add_data(self):
+        if self.var_dep.get() == "Select Department" or self.var_course.get() == "Select Year" or self.var_year.get() == "Select Year" or self.var_sem.get() == "Select Semester" or self.var_id.get() == "" or self.var_name.get() == "" or self.var_roll.get() == "" or self.var_dob.get() =="" or self.var_gender.get() == "Select Division" or self.var_gender.get() == "Select Gender":
+            messagebox.showerror("Error","All Fields Are Required",parent=self.root)
+        else:
+            pass
+    
+    
+        
         
 
         
