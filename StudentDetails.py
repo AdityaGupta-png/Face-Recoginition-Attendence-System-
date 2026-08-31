@@ -254,11 +254,11 @@ class StudentDetails:
         
         # Adding image in the right frame 
         right_frame_img = Image.open(r"Project_Images\right_frame_img.jpg")
-        right_frame_img = right_frame_img.resize((589,150),Image.Resampling.LANCZOS)
+        right_frame_img = right_frame_img.resize((589,120),Image.Resampling.LANCZOS)
         self.photoimg_right_frame = ImageTk.PhotoImage(right_frame_img)
         
         f_label_1 = Label(right_frame,image=self.photoimg_right_frame)
-        f_label_1.place(x=1,y=0,width=585,height=150)
+        f_label_1.place(x=1,y=0,width=585,height=120)
         
         # # Making the search system Label which is used to find the student details ny using their id 
         # #################### SEARCH SYSTEM ###################
@@ -266,7 +266,7 @@ class StudentDetails:
                                         bd=2,bg="white",relief=RIDGE,
                                         text="Search System",
                                         font=("times new roman",12,"bold"))
-        Search_system_frame.place(x=0,y=150,width=585,height=70)
+        Search_system_frame.place(x=0,y=120,width=585,height=70)
         
         # Making the search lebel 
         search_label = Label(Search_system_frame,text="Search By:",font=("times new roman",13,"bold"),bg="red",fg="white")
@@ -333,22 +333,23 @@ class StudentDetails:
         self.student_table["show"] = "headings"
         
         # Set the width of the every columns 
-        self.student_table.column("dep",width=150)
-        self.student_table.column("course",width=150)
-        self.student_table.column("year_1",width=150)
-        self.student_table.column("sem",width=150)
-        self.student_table.column("id",width=150)
-        self.student_table.column("name",width=150)
-        self.student_table.column("roll",width=150)
-        self.student_table.column("dob",width=150)
-        self.student_table.column("div",width=150)
-        self.student_table.column("gender",width=150)
-        self.student_table.column("photo",width=150)
+        self.student_table.column("dep",width=120)
+        self.student_table.column("course",width=120)
+        self.student_table.column("year_1",width=120)
+        self.student_table.column("sem",width=120)
+        self.student_table.column("id",width=120)
+        self.student_table.column("name",width=120)
+        self.student_table.column("roll",width=120)
+        self.student_table.column("dob",width=120)
+        self.student_table.column("div",width=120)
+        self.student_table.column("gender",width=120)
+        self.student_table.column("photo",width=120)
         
         scroll_x.config(command=self.student_table.xview)
         scroll_y.config(command=self.student_table.yview)
         
         self.student_table.pack(fill=BOTH,expand=1)
+        self.fetch_data()
         
     # ================================ Function declaration ==================================
     def add_data(self):
@@ -375,12 +376,31 @@ class StudentDetails:
                                                                                                     self.var_radio.get()
                                                                                                 ))
                 conn.commit()
+                self.fetch_data()
                 conn.close()
                 messagebox.showinfo("Success","Student Details Has Been Added Successfully",parent=self.root)
                 
             except Exception as es:
                 messagebox.showerror("error",f"Due To : {str(es)}",parent=self.root)
 
+    # ============================= FETCH DATA ===========================================
+    def fetch_data(self):
+        conn = mysql.connector.connect(host = "localhost",
+                                       username = "root",
+                                       password = "Aditya@1234",
+                                       database = "face_recognize")
+        my_cursor = conn.cursor()
+        my_cursor.execute("select * from student")
+        data = my_cursor.fetchall()
+        
+        if len(data) != 0:
+            self.student_table.delete(*self.student_table.get_children())
+            for i in data :
+                self.student_table.insert("",END,values=i)
+            conn.commit
+        conn.close()
+        
+        
         
         
         
