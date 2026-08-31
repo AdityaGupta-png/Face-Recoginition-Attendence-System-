@@ -62,6 +62,11 @@ creating the FACE RECOGNITION ATTENDENCE SYSTEM root window
                 --> We can search student based on their rollNo. and studentId
             c. Table frame 
                 --> Show all the data related registe student
+            
+        3 . Establish the connection with the MYSQL data base 
+            a. Working on the save button 
+                --> After click its save the information in the mysql workbench 
+            b. fetch the data from the MYSQL to student frame 
                 
 
 
