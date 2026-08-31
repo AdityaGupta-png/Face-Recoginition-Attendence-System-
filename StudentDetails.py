@@ -20,7 +20,7 @@ class StudentDetails:
         # Making the variables 
         self.var_dep = StringVar()
         self.var_course = StringVar()
-        self.var_year = StringVar()
+        self.var_year_1 = StringVar()
         self.var_sem = StringVar()
         self.var_id = StringVar()
         self.var_name = StringVar()
@@ -118,7 +118,7 @@ class StudentDetails:
         year_label = Label(cousre_info,text="Year",font=("times new roman",12,"bold"),bg="white")
         year_label.grid(row=1,column=0,padx=5,pady=10)
         
-        year_combo = ttk.Combobox(cousre_info,textvariable=self.var_year,font=("times new roman",12,"bold"),width=17,state="readonly")
+        year_combo = ttk.Combobox(cousre_info,textvariable=self.var_year_1,font=("times new roman",12,"bold"),width=17,state="readonly")
         year_combo["values"] = ("Select Year",
                                 "2025-26",
                                 "2026-27",
@@ -304,7 +304,7 @@ class StudentDetails:
         
         self.student_table = ttk.Treeview(table_frame,columns=("dep",
                                                                "course",
-                                                               "year",
+                                                               "year_1",
                                                                "sem",
                                                                "id",
                                                                "name",
@@ -321,7 +321,7 @@ class StudentDetails:
     
         self.student_table.heading("dep",text="Department")
         self.student_table.heading("course",text="Current College Year")
-        self.student_table.heading("year",text="Year")
+        self.student_table.heading("year_1",text="Year")
         self.student_table.heading("sem",text="Semester")
         self.student_table.heading("id",text="StudentId")
         self.student_table.heading("name",text="Student Name")
@@ -335,7 +335,7 @@ class StudentDetails:
         # Set the width of the every columns 
         self.student_table.column("dep",width=150)
         self.student_table.column("course",width=150)
-        self.student_table.column("year",width=150)
+        self.student_table.column("year_1",width=150)
         self.student_table.column("sem",width=150)
         self.student_table.column("id",width=150)
         self.student_table.column("name",width=150)
@@ -352,17 +352,35 @@ class StudentDetails:
         
     # ================================ Function declaration ==================================
     def add_data(self):
-        if self.var_dep.get() == "Select Department" or self.var_course.get() == "Select Year" or self.var_year.get() == "Select Year" or self.var_sem.get() == "Select Semester" or self.var_id.get() == "" or self.var_name.get() == "" or self.var_roll.get() == "" or self.var_dob.get() =="" or self.var_gender.get() == "Select Division" or self.var_gender.get() == "Select Gender":
+        if self.var_dep.get() == "Select Department" or self.var_course.get() == "Select Year" or self.var_year_1.get() == "Select Year" or self.var_sem.get() == "Select Semester" or self.var_id.get() == "" or self.var_name.get() == "" or self.var_roll.get() == "" or self.var_dob.get() =="" or self.var_gender.get() == "Select Division" or self.var_gender.get() == "Select Gender":
             messagebox.showerror("Error","All Fields Are Required",parent=self.root)
         else:
-            pass
-    
-    
-        
-        
+            try:
+                conn = mysql.connector.connect(host = "localhost",
+                                            username = "root",
+                                            password = "Aditya@1234",
+                                            database = "face_recognize")
+                my_cursor = conn.cursor()
+                my_cursor.execute("insert into student values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+                                                                                                    self.var_dep.get(),
+                                                                                                    self.var_course.get(),
+                                                                                                    self.var_year_1.get(),
+                                                                                                    self.var_sem.get(),
+                                                                                                    self.var_id.get(),
+                                                                                                    self.var_name.get(),
+                                                                                                    self.var_roll.get(),
+                                                                                                    self.var_dob.get(),
+                                                                                                    self.var_div.get(),
+                                                                                                    self.var_gender.get(),
+                                                                                                    self.var_radio.get()
+                                                                                                ))
+                conn.commit()
+                conn.close()
+                messagebox.showinfo("Success","Student Details Has Been Added Successfully",parent=self.root)
+                
+            except Exception as es:
+                messagebox.showerror("error",f"Due To : {str(es)}",parent=self.root)
 
-        
-        
         
         
         
