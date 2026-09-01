@@ -232,7 +232,7 @@ class StudentDetails:
         delete_btn.grid(row=0,column=2,padx=12,pady=5)
         
         # 4 --> reset button
-        reset_btn = Button(button_frame,text="Reset",width=13,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        reset_btn = Button(button_frame,text="Reset",width=13,command=self.reset_data,font=("times new roman",13,"bold"),bg="blue",fg="white")
         reset_btn.grid(row=0,column=3,padx=12,pady=5)
         
         # Making the second button frame 
@@ -490,7 +490,19 @@ class StudentDetails:
             except Exception as es :
                 messagebox.showerror("Error", f"Due to {str(es)}")
             
-            
+    #  ===================================== RESET METHOD ====================================
+    def reset_data(self):
+        self.var_dep.set("Select Department")
+        self.var_course.set("Select Year")
+        self.var_year_1.set("Select Year")
+        self.var_sem.set("Select Semester")
+        self.var_id.set("")
+        self.var_name.set("")
+        self.var_roll.set("")
+        self.var_dob.set("")
+        self.var_div.set("Select Division")
+        self.var_gender.set("Select Gender")
+        self.var_radio.set("")
         
        
         
