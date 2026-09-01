@@ -228,7 +228,7 @@ class StudentDetails:
         update_btn.grid(row=0,column=1,padx=12,pady=5)
         
         # 3 --> delete button 
-        delete_btn = Button(button_frame,text="Delete",width=13,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        delete_btn = Button(button_frame,text="Delete",command=self.delete_data,width=13,font=("times new roman",13,"bold"),bg="blue",fg="white")
         delete_btn.grid(row=0,column=2,padx=12,pady=5)
         
         # 4 --> reset button
@@ -459,6 +459,39 @@ class StudentDetails:
         
             except Exception as es:
                 messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
+    
+    # ======================================== DELETE METHOD ====================================
+    def delete_data(self):
+        if self.var_id.get() == "":
+            messagebox.showerror("Error","Student Id Must Be Required",parent=self.root)
+        
+        else:
+            try:
+                delete = messagebox.askyesno("Delete","Do You Want To Delete Student Data",parent=self.root)
+                
+                if delete > 0 :
+                    conn = mysql.connector.connect(host = "localhost",
+                                            username = "root",
+                                            password = "Aditya@1234",
+                                            database = "face_recognize")
+                    my_cursor = conn.cursor()
+                    sql = "delete from student where id= %s"
+                    val = (self.var_id.get(),)
+                    my_cursor.execute(sql,val)
+                else:
+                    if not delete:
+                        return
+                    
+                messagebox.showinfo("Info","Student Details Deleted Successfully",parent=self.root)
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                    
+            except Exception as es :
+                messagebox.showerror("Error", f"Due to {str(es)}")
+            
+            
+        
        
         
         
