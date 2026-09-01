@@ -4,6 +4,7 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from StudentDetails import StudentDetails
 import os              # Operating system directory 
+from train import Train_Face
 
 # Making the class Face_Recogintion attendence system
 class Face_Recoginition_System: 
@@ -50,7 +51,9 @@ class Face_Recoginition_System:
         # Added the title label 
         title_label = Label(bg_img,text="FACE RECOGNITION ATTENDENCE SYSTEM SOFTWARE",
                             font=("times new roman",30,"bold"),
-                            bg = "white",fg="red")
+                            bg = "white",
+                            fg="red",
+                            anchor="center")
         title_label.place(x=0,y=0,width=1350,height=45)
         
         # Adding buttons to the Background label
@@ -104,10 +107,10 @@ class Face_Recoginition_System:
         img9 = img9.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_9 = ImageTk.PhotoImage(img9)
         
-        b1 = Button(bg_img,image=self.photoimg_9,cursor="hand2")
+        b1 = Button(bg_img,image=self.photoimg_9,command=self.Train_Face_Window,cursor="hand2")
         b1.place(x= 95,y= 295,width=200,height=180)
         
-        b1_1 = Button(bg_img,text="Train Face",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
+        b1_1 = Button(bg_img,text="Train Face",command=self.Train_Face_Window,cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_1.place(x= 95,y= 475,width=200,height=35)
         
         # Add Photos 
@@ -154,6 +157,10 @@ class Face_Recoginition_System:
     def Student_details(self):
         self.new_window = Toplevel(self.root)
         self.app = StudentDetails(self.new_window)
+        
+    def Train_Face_Window(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Train_Face(self.new_window)
         
 
         
