@@ -3,6 +3,7 @@ from tkinter import*
 from tkinter import ttk 
 from PIL import Image,ImageTk
 from StudentDetails import StudentDetails
+import os              # Operating system directory 
 
 # Making the class Face_Recogintion attendence system
 class Face_Recoginition_System: 
@@ -114,10 +115,10 @@ class Face_Recoginition_System:
         img10 = img10.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_10 = ImageTk.PhotoImage(img10)
         
-        b2 = Button(bg_img,image=self.photoimg_10,cursor="hand2")
+        b2 = Button(bg_img,image=self.photoimg_10,command=self.open_image,cursor="hand2")
         b2.place(x= 375,y= 295,width=200,height=180)
         
-        b1_2 = Button(bg_img,text="Photos",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
+        b1_2 = Button(bg_img,text="Photos",cursor="hand2",command=self.open_image,font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 375,y= 475,width=200,height=35)
         
         # Developer button  
@@ -141,6 +142,10 @@ class Face_Recoginition_System:
         
         b1_2 = Button(bg_img,text="Exit",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 960,y= 475,width=200,height=35)
+        
+    # function to open the direct image directory 
+    def open_image(self):
+        os.startfile("data")
         
         
         # ====================================== BUTTONS FUNCTION ===========================================
