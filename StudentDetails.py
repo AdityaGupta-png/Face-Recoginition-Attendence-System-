@@ -224,7 +224,7 @@ class StudentDetails:
         save_btn.grid(row=0,column=0,padx=12,pady=5)
         
         # 2 --> Update button
-        update_btn = Button(button_frame,text="Update",width=13,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        update_btn = Button(button_frame,text="Update",command=self.update_data,width=13,font=("times new roman",13,"bold"),bg="blue",fg="white")
         update_btn.grid(row=0,column=1,padx=12,pady=5)
         
         # 3 --> delete button 
@@ -349,6 +349,7 @@ class StudentDetails:
         scroll_y.config(command=self.student_table.yview)
         
         self.student_table.pack(fill=BOTH,expand=1)
+        self.student_table.bind("<ButtonRelease>",self.get_cursor)
         self.fetch_data()
         
     # ================================ Function declaration ==================================
@@ -399,6 +400,67 @@ class StudentDetails:
                 self.student_table.insert("",END,values=i)
             conn.commit
         conn.close()
+        
+    # =================================  get cursor ===========================
+    def get_cursor(self,event=""):
+        cursor_focus = self.student_table.focus()
+        content = self.student_table.item(cursor_focus)
+        data = content["values"]
+        
+        self.var_dep.set(data[0])
+        self.var_course.set(data[1])
+        self.var_year_1.set(data[2])
+        self.var_sem.set(data[3])
+        self.var_id.set(data[4])
+        self.var_name.set(data[5])
+        self.var_roll.set(data[6])
+        self.var_dob.set(data[7])
+        self.var_div.set(data[8])
+        self.var_gender.set(data[9])
+        self.var_radio.set(data[10])
+        
+    #  =============================== UPDATE FUNCTION =================
+    def update_data(self):
+        if self.var_dep.get() == "Select Department" or self.var_course.get() == "Select Year" or self.var_year_1.get() == "Select Year" or self.var_sem.get() == "Select Semester" or self.var_id.get() == "" or self.var_name.get() == "" or self.var_roll.get() == "" or self.var_dob.get() =="" or self.var_gender.get() == "Select Division" or self.var_gender.get() == "Select Gender":
+            messagebox.showerror("Error","All Fields Are Required",parent=self.root)
+      
+        else:
+            try:
+                update = messagebox.askyesno("Update","Do You Want To Update Data ",parent=self.root)
+                if update > 0:
+                    conn = mysql.connector.connect(host = "localhost",
+                                       username = "root",
+                                       password = "Aditya@1234",
+                                       database = "face_recognize")
+                    my_cursor = conn.cursor()
+                    my_cursor.execute("update student set Dep=%s,Course=%s,year_1=%s,Semester=%s,Name=%s,Roll=%s,Dob=%s,Division=%s,Gender=%s,PhotoSample=%s WHERE Id=%s",(
+                                                                                                                                                                    self.var_dep.get(),
+                                                                                                                                                                    self.var_course.get(),
+                                                                                                                                                                    self.var_year_1.get(),
+                                                                                                                                                                    self.var_sem.get(),
+                                                                                                                                                                    self.var_name.get(),
+                                                                                                                                                                    self.var_roll.get(),
+                                                                                                                                                                    self.var_dob.get(),  
+                                                                                                                                                                    self.var_div.get(),
+                                                                                                                                                                    self.var_gender.get(),
+                                                                                                                                                                    self.var_radio.get(),
+                                                                                                                                                                    self.var_id.get()
+                                                                                                                                                                                                                                      
+                    ))                                                                                                                                                                                                                                                                 
+                else:
+                    if not update:
+                        return
+                
+                messagebox.showinfo('Sucess',"Student Details Successfully Updated",parent=self.root)
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                
+        
+            except Exception as es:
+                messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
+       
+        
         
         
         
