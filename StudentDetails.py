@@ -3,7 +3,8 @@ from tkinter import*
 from tkinter import ttk 
 from PIL import Image,ImageTk
 from tkinter import messagebox   # importing the message box 
-import mysql.connector
+import mysql.connector   # import mysql data base 
+import cv2       # Importing the opencv 
 
 
 
@@ -240,7 +241,7 @@ class StudentDetails:
         button_frame_2.place(x=0,y=385,width=665,height=50)
         
         # 1 --> Take phtot sample 
-        takePhotoSample_btn = Button(button_frame_2,text="Take Photo Sample",width=30,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        takePhotoSample_btn = Button(button_frame_2,text="Take Photo Sample",command=self.generate_dataset,width=30,font=("times new roman",13,"bold"),bg="blue",fg="white")
         takePhotoSample_btn.grid(row=0,column=0,padx=10,pady=5)
         
         # 2 --> Update photo sample 
@@ -504,7 +505,82 @@ class StudentDetails:
         self.var_gender.set("Select Gender")
         self.var_radio.set("")
         
-       
+    
+    # ================ GENERATING THE PHOTO SAMPLE AND TAKE DATA SET =================================
+    def generate_dataset(self):
+        if self.var_dep.get() == "Select Department" or self.var_course.get() == "Select Year" or self.var_year_1.get() == "Select Year" or self.var_sem.get() == "Select Semester" or self.var_id.get() == "" or self.var_name.get() == "" or self.var_roll.get() == "" or self.var_dob.get() =="" or self.var_div.get() == "Select Division" or self.var_gender.get() == "Select Gender" or self.var_radio.get() == "":  
+            messagebox.showerror("Error","All Fields Are Required",parent=self.root)
+      
+        else:
+            try:
+                conn = mysql.connector.connect(host = "localhost",
+                                       username = "root",
+                                       password = "Aditya@1234",
+                                       database = "face_recognize")
+                my_cursor = conn.cursor()
+                my_cursor.execute("SELECT * FROM Student")
+                my_result = my_cursor.fetchall()
+                id = len(my_result) + 1
+
+                my_cursor.execute("update student set Dep=%s,Course=%s,year_1=%s,Semester=%s,Name=%s,Roll=%s,Dob=%s,Division=%s,Gender=%s,PhotoSample=%s WHERE Id=%s",(
+                                                                                                                                                                    self.var_dep.get(),
+                                                                                                                                                                    self.var_course.get(),
+                                                                                                                                                                    self.var_year_1.get(),
+                                                                                                                                                                    self.var_sem.get(),
+                                                                                                                                                                    self.var_name.get(),
+                                                                                                                                                                    self.var_roll.get(),
+                                                                                                                                                                    self.var_dob.get(),  
+                                                                                                                                                                    self.var_div.get(),
+                                                                                                                                                                    self.var_gender.get(),
+                                                                                                                                                                    self.var_radio.get(),
+                                                                                                                                                                    self.var_id.get()
+
+                ))    
+                conn.commit()       
+                self.fetch_data()        
+                self.reset_data()     
+                conn.close()                                                                                                                                                  
+                
+                #  ================LOAD HARCASCADE FRONTAL FACE DEFAILT FILE FROM OPENCV ==========================
+                face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+                
+                def face_cropped(img):
+                    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+                    faces = face_classifier.detectMultiScale(gray,1.3,5)
+                    #scaling factor = 1.3
+                    #Minimum Neighbor = 5
+                    
+                    for (x,y,w,h) in faces:
+                        face_cropped = img[y:y+h,x:x+w]
+                        return face_cropped
+                    
+                cap = cv2.VideoCapture(0)
+                img_id = 0
+                while True:
+                    ret, my_frame = cap.read()
+                    if not ret:
+                        break
+
+                    face = face_cropped(my_frame)
+                    if face is not None:
+                        img_id += 1
+                        face = cv2.resize(face, (450, 450))
+                        face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+
+                        file_name_path = f"data/user.{id}.{img_id}.jpg"
+                        cv2.imwrite(file_name_path, face)
+
+                        cv2.putText(face, str(img_id), (50,50), cv2.FONT_HERSHEY_COMPLEX, 2, (0,255,0), 2)
+                        cv2.imshow("Cropped Face", face)
+
+                    if cv2.waitKey(1) == 13 or img_id == 100:
+                        break
+                cap.release()       
+                cv2.destroyAllWindows()  
+                messagebox.showinfo("Result","Generating Data Set Completed!!!!!!",parent=self.root)   
+        
+            except Exception as es :
+                messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
         
         
         
