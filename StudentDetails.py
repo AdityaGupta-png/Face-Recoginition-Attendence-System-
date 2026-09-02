@@ -7,8 +7,6 @@ import mysql.connector   # import mysql data base
 import cv2       # Importing the opencv 
 
 
-
-
 # Making the class Face_Recogintion attendence system
 class StudentDetails: 
     
@@ -66,7 +64,9 @@ class StudentDetails:
         # Added the title label 
         title_label = Label(bg_img,text="STUDENT MANAGEMENT SYSTEM",
                             font=("times new roman",30,"bold"),
-                            bg = "white",fg="red")
+                            bg = "white",
+                            fg="red",
+                            anchor="center")
         title_label.place(x=0, y=0, width=1350, height=45)
         
         # Making the main frame 
@@ -406,7 +406,10 @@ class StudentDetails:
     def get_cursor(self,event=""):
         cursor_focus = self.student_table.focus()
         content = self.student_table.item(cursor_focus)
-        data = content["values"]
+        data = content.get("values",[])
+        
+        if not data or len(data) < 11:
+            return     # nothing selected or incomplete row 
         
         self.var_dep.set(data[0])
         self.var_course.set(data[1])
