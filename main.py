@@ -5,6 +5,7 @@ from PIL import Image,ImageTk
 from StudentDetails import StudentDetails
 import os              # Operating system directory 
 from train import Train_Face
+from Face_Recognition import Face_Recognition
 
 # Making the class Face_Recogintion attendence system
 class Face_Recoginition_System: 
@@ -54,7 +55,7 @@ class Face_Recoginition_System:
                             bg = "white",
                             fg="red",
                             anchor="center")
-        title_label.place(x=0,y=0,width=1350,height=45)
+        title_label.place(x=0,y=0,width=1280,height=45)
         
         # Adding buttons to the Background label
         
@@ -74,10 +75,10 @@ class Face_Recoginition_System:
         img6 = img6.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_6 = ImageTk.PhotoImage(img6)
         
-        b2 = Button(bg_img,image=self.photoimg_6,cursor="hand2")
+        b2 = Button(bg_img,image=self.photoimg_6,cursor="hand2",command=self.Face_Recognition_Window)
         b2.place(x= 375,y= 50,width=200,height=180)
         
-        b1_2 = Button(bg_img,text="Face Detector",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
+        b1_2 = Button(bg_img,text="Face Recognition",cursor="hand2",command=self.Face_Recognition_Window,font=("times new roman",18,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 375,y= 230,width=200,height=35)
         
         # Attendence face button  
@@ -153,14 +154,21 @@ class Face_Recoginition_System:
         
         # ====================================== BUTTONS FUNCTION ===========================================
         
-        # funtion of the student details 
+    # funtion of the student details 
     def Student_details(self):
         self.new_window = Toplevel(self.root)
         self.app = StudentDetails(self.new_window)
         
+        
+    # Function of the train face 
     def Train_Face_Window(self):
         self.new_window = Toplevel(self.root)
         self.app = Train_Face(self.new_window)
+        
+    # Making the function of the 
+    def Face_Recognition_Window(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Face_Recognition(self.new_window)
         
 
         
