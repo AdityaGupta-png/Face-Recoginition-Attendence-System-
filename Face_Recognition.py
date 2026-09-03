@@ -27,8 +27,28 @@ class Face_Recognition:
                             anchor="center")
         title_label.place(x=0,y=0,width=1280,height=60)
         
-        # Adding the images 
+        # Adding the 1st images 
+        img1 = Image.open(r"Project_Images\Face_Detector_4.jpg")
+        img1 = img1.resize((550,530),Image.Resampling.LANCZOS)
+        self.photoimg_1 = ImageTk.PhotoImage(img1)
         
+        f_label_1 = Label(self.root,image=self.photoimg_1)
+        f_label_1.place(x=0,y=60,width=550,height=530)
+        
+        # Adding the 2 nd image
+        img2 = Image.open(r"Project_Images\faec_detect.pg.jpg")
+        img2 = img2.resize((730,530),Image.Resampling.LANCZOS)
+        self.photoimg_2 = ImageTk.PhotoImage(img2)
+        
+        f_label_1 = Label(self.root,image=self.photoimg_2)
+        f_label_1.place(x=550,y=60,width=730,height=530)
+        
+        # Making the bottom title 
+        title_bottom = Label(self.root,
+                             text="Frontal Face Detector",
+                             font=("times new roman",25,"bold"),
+                             bg="white",fg="blue",anchor="center")
+        title_bottom.place(x=0,y=590,width=1280,height=50)
         
     
         
