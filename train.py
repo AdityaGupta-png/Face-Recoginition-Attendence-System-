@@ -24,7 +24,7 @@ class Train_Face:
                             fg="red",
                             bg="white",
                             anchor="center")
-        title_label.place(x=0,y=0,width=1350,height=45)
+        title_label.place(x=0,y=0,width=1280,height=45)
         
         # Add the image
         img1 = Image.open(r"Project_Images\train_imp_img.jpg")

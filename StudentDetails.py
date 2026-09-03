@@ -67,7 +67,7 @@ class StudentDetails:
                             bg = "white",
                             fg="red",
                             anchor="center")
-        title_label.place(x=0, y=0, width=1350, height=45)
+        title_label.place(x=0, y=0, width=1280, height=45)
         
         # Making the main frame 
         main_frame = Frame(bg_img,border=2,bg="white")
