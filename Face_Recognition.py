@@ -29,26 +29,27 @@ class Face_Recognition:
         
         # Adding the 1st images 
         img1 = Image.open(r"Project_Images\Face_Detector_4.jpg")
-        img1 = img1.resize((550,530),Image.Resampling.LANCZOS)
+        img1 = img1.resize((550,600),Image.Resampling.LANCZOS)
         self.photoimg_1 = ImageTk.PhotoImage(img1)
         
         f_label_1 = Label(self.root,image=self.photoimg_1)
-        f_label_1.place(x=0,y=60,width=550,height=530)
+        f_label_1.place(x=0,y=60,width=550,height=600)
         
         # Adding the 2 nd image
         img2 = Image.open(r"Project_Images\faec_detect.pg.jpg")
-        img2 = img2.resize((730,530),Image.Resampling.LANCZOS)
+        img2 = img2.resize((730,600),Image.Resampling.LANCZOS)
         self.photoimg_2 = ImageTk.PhotoImage(img2)
         
-        f_label_1 = Label(self.root,image=self.photoimg_2)
-        f_label_1.place(x=550,y=60,width=730,height=530)
+        f_label_2 = Label(self.root,image=self.photoimg_2)
+        f_label_2.place(x=550,y=60,width=730,height=600)
         
-        # Making the bottom title 
-        title_bottom = Label(self.root,
-                             text="Frontal Face Detector",
-                             font=("times new roman",25,"bold"),
-                             bg="white",fg="blue",anchor="center")
-        title_bottom.place(x=0,y=590,width=1280,height=50)
+        # Making the button inside the image 2 
+        b1_image_2 = Button(f_label_2,text="Face Recognition",cursor="hand2",
+                            font=("times new roman",18,"bold"),
+                            fg="white",bg="blue")
+        b1_image_2.place(x=260,y=530,width=200,height=35)
+        
+
         
     
         
