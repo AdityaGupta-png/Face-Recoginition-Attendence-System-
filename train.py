@@ -47,38 +47,83 @@ class Train_Face:
         f_label_1.place(x=0,y=345,width=1280,height=300)
         
     def train_classifier(self):
-        data_dir = ("data")
-        path = [os.path.join(data_dir,file) for file in os.listdir(data_dir)]
-        
+
+        data_dir = "data"
+
+        path = [
+        os.path.join(data_dir, file)
+        for file in os.listdir(data_dir)
+        if file.lower().endswith((".jpg", ".jpeg", ".png"))
+        ]
+
         faces = []
         ids = []
-        
-        for image in path :
-            img = Image.open(image).convert('L')  #Gray scal convert 
-            imageNp = np.array(img,'uint8')
-            
-            id = int(os.path.split(image)[1].split('.')[1])
-            
+
+        for image in path:
+
+            filename = os.path.basename(image)
+
+            print("Processing:", filename)
+
+            try:
+ 
+                parts = filename.split(".")
+
+                # Expected:
+                # user.1.1.jpg
+
+                if len(parts) < 4:
+                    print("Skipping invalid file:", filename)
+                    continue
+
+                student_id = int(parts[1])
+
+            except ValueError:
+
+                print("Invalid student ID in file:", filename)
+                continue
+
+            img = Image.open(image).convert("L")
+
+            imageNp = np.array(img, "uint8")
+
             faces.append(imageNp)
-            ids.append(id)
-            
-            cv2.imshow("Training Face",imageNp)
-            cv2.waitKey(1) == 13
-            
+            ids.append(student_id)
+
+            cv2.imshow("Training Face", imageNp)
+
+            if cv2.waitKey(1) == 13:
+                break
+
+        if len(faces) == 0:
+
+            messagebox.showerror(
+                "Error",
+                "No valid training images found!",
+                parent=self.root
+                )
+
+            return
+
         ids = np.array(ids)
-        
-        # ====================== TRAIN THE CLASSIFIER AND SAVE ===================
-        # Create LBPH recognizer
+
+    # ================================
+    # TRAIN CLASSIFIER
+    # ================================
+
         clf = cv2.face.LBPHFaceRecognizer_create()
 
-        # Train with faces and IDs
-        clf.train(faces, np.array(ids))
+        clf.train(faces, ids)
 
-        # Save the trained model
         clf.write("Classifier.xml")
 
         cv2.destroyAllWindows()
-        messagebox.showinfo("Result", "Training Datasets Completed!!!",parent=self.root) 
+
+        messagebox.showinfo(
+        "Result",
+        "Training Datasets Completed!!!",
+        parent=self.root
+        )
         
 
 # Making object 
