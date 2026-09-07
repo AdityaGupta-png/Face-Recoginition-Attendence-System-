@@ -521,9 +521,14 @@ class StudentDetails:
                                        password = "Aditya@1234",
                                        database = "face_recognize")
                 my_cursor = conn.cursor()
-                my_cursor.execute("SELECT * FROM Student")
-                my_result = my_cursor.fetchall()
-                id = len(my_result) + 1
+                
+                # -----------------------------------------
+                # GET STUDENT ID
+                # -----------------------------------------
+
+                student_id = self.var_id.get()
+
+                print("Student ID used for dataset:", student_id)
 
                 my_cursor.execute("update student set Dep=%s,Course=%s,year_1=%s,Semester=%s,Name=%s,Roll=%s,Dob=%s,Division=%s,Gender=%s,PhotoSample=%s WHERE Id=%s",(
                                                                                                                                                                     self.var_dep.get(),
@@ -538,54 +543,114 @@ class StudentDetails:
                                                                                                                                                                     self.var_radio.get(),
                                                                                                                                                                     self.var_id.get()
 
-                ))    
+                ))                                                                                                                                                                  
                 conn.commit()       
                 self.fetch_data()        
                 self.reset_data()     
-                conn.close()                                                                                                                                                  
-                
+                conn.close()                                                                                                                                                      
                 #  ================LOAD HARCASCADE FRONTAL FACE DEFAILT FILE FROM OPENCV ==========================
                 face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-                
+               
                 def face_cropped(img):
-                    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-                    faces = face_classifier.detectMultiScale(gray,1.3,5)
-                    #scaling factor = 1.3
-                    #Minimum Neighbor = 5
-                    
-                    for (x,y,w,h) in faces:
-                        face_cropped = img[y:y+h,x:x+w]
+                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+                    faces = face_classifier.detectMultiScale(
+                        gray,
+                        scaleFactor=1.3,
+                        minNeighbors=5
+                        )
+
+                    for (x, y, w, h) in faces:
+                        face_cropped = img[y:y+h, x:x+w]
                         return face_cropped
-                    
+
+                    return None
+
+
+
+
+
+# -----------------------------------------
+# OPEN CAMERA
+# -----------------------------------------
+
                 cap = cv2.VideoCapture(0)
+
+                if not cap.isOpened():
+                    messagebox.showerror(
+                    "Error",
+                    "Camera could not be opened",
+                    parent=self.root
+                    )
+                    return
+
+
                 img_id = 0
+
                 while True:
+
                     ret, my_frame = cap.read()
+
                     if not ret:
+                        print("Could not read camera frame")
                         break
 
                     face = face_cropped(my_frame)
+
                     if face is not None:
+
                         img_id += 1
+
+                        # Resize face
                         face = cv2.resize(face, (450, 450))
+
+                        # Convert to grayscale
                         face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
 
-                        file_name_path = f"data/user.{id}.{img_id}.jpg"
+        # -----------------------------------------
+        # SAVE FACE USING DATABASE STUDENT ID
+        # -----------------------------------------
+
+                        file_name_path = f"data/user.{student_id}.{img_id}.jpg"
+
                         cv2.imwrite(file_name_path, face)
 
-                        cv2.putText(face, str(img_id), (50,50), cv2.FONT_HERSHEY_COMPLEX, 2, (0,255,0), 2)
-                        cv2.imshow("Cropped Face", face)
+                        print("Saved:", file_name_path)
 
-                    if cv2.waitKey(1) == 13 or img_id == 100:
+                        # Display image number
+                        display_face = face.copy()
+
+                        cv2.putText(
+                            display_face,
+                            str(img_id),
+                            (50, 50),
+                            cv2.FONT_HERSHEY_COMPLEX,
+                            2,
+                            (255, 255, 255),
+                            2
+                        )
+
+                        cv2.imshow("Cropped Face", display_face)
+
+                  # ENTER or 100 images
+                    if cv2.waitKey(1) == 13 or img_id >= 100:
                         break
-                cap.release()       
-                cv2.destroyAllWindows()  
-                messagebox.showinfo("Result","Generating Data Set Completed!!!!!!",parent=self.root)   
+
+
+                cap.release()
+                cv2.destroyAllWindows()
+
+                messagebox.showinfo("info",
+                "Generating Data Set Completed!!!!!!",
+                parent=self.root
+                )
         
-            except Exception as es :
-                messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
-        
-        
+            except Exception as es:
+                messagebox.showerror(
+                "Error",
+                f"Due To: {str(es)}",
+                parent=self.root
+            )
         
         
         
