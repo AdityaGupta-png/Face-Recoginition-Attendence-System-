@@ -302,7 +302,7 @@ class StudentDetails:
         
         # Making the scroll bar in the y
         scroll_y = ttk.Scrollbar(table_frame,orient=VERTICAL)
-        
+    
         self.student_table = ttk.Treeview(table_frame,columns=("dep",
                                                                "course",
                                                                "year_1",
