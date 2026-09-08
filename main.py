@@ -10,6 +10,7 @@ from Face_Recognition import Face_Recognition
 # Making the class Face_Recogintion attendence system
 class Face_Recoginition_System: 
     
+    
     # Making the constructor of the class 
     def __init__(self,root):
         self.root = root
