@@ -8,7 +8,8 @@ import mysql.connector   # import mysql data base
 import cv2       # Importing the opencv 
 import numpy as np
 import os
-
+from time import strftime   # import the date and time 
+from datetime import datetime
 
 # Making the class Face_Recogintion attendence system
 class Face_Recognition: 
@@ -49,6 +50,54 @@ class Face_Recognition:
                             font=("times new roman",18,"bold"),
                             fg="white",bg="blue")
         b1_image_2.place(x=260,y=530,width=200,height=35)
+        
+    #  ============================   MARK ATTENDENCE =================================
+    def mark_attendence(self,i, n, cc, d, di, r, s, dob):
+        with open("Attendence.csv","r+",newline="\n") as f :
+            
+            # Store the file data 
+            myDataList = f.readlines()
+            
+            # Creating empty list 
+            name_List = []
+            
+            for line in myDataList:
+                
+                # Store values in form of the spilling value 
+                entry = line.split((","))
+                
+                if len(entry) > 0:
+                    name_List.append(entry[0])
+                
+        
+            # making the condition if id not in name list then mark attendence 
+            # if present then do not mark attendence same have present 
+            if str(i) not in name_List:
+                
+                now = datetime.now()
+                
+                # for the year 
+                d1 = now.strftime("%d/%m/%Y")
+                
+                # Making the date string 
+                dtString = now.strftime("%H:%M:%S")
+                
+                # Writing all the data in csv files 
+                f.writelines(f"\n{i},{n},{cc},{d},{di},{r},{s},{dob},{dtString},{d1},Present \n")
+                
+                # In above we store 
+                """
+                1. Student Id 
+                2. Student Name 
+                3. Current cousre 
+                4. department 
+                5. Division
+                6. Roll No.
+                7. Semester 
+                8. Date of birth 
+                9. timing and day month and year 
+                """
+            
         
     # ============================== FACE RECOGNITION =====================================
     # Adding the face_recognize methods 
@@ -233,6 +282,9 @@ class Face_Recognition:
                     (0, 255, 0),
                     2
                     )
+                    
+                    # Mark attendence
+                    self.mark_attendence(i,n,cc,d,di,r,s,dob)
 
             # =================================================
             # UNKNOWN FACE
