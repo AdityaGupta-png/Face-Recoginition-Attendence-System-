@@ -6,6 +6,7 @@ from StudentDetails import StudentDetails
 import os              # Operating system directory 
 from train import Train_Face
 from Face_Recognition import Face_Recognition
+from Attendence import Attendence
 
 # Making the class Face_Recogintion attendence system
 class Face_Recoginition_System: 
@@ -87,10 +88,10 @@ class Face_Recoginition_System:
         img7 = img7.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_7 = ImageTk.PhotoImage(img7)
         
-        b2 = Button(bg_img,image=self.photoimg_7,cursor="hand2")
+        b2 = Button(bg_img,image=self.photoimg_7,command=self.Attendence_Window,cursor="hand2")
         b2.place(x= 655,y= 50,width=200,height=180)
         
-        b1_2 = Button(bg_img,text="Attendence",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
+        b1_2 = Button(bg_img,text="Attendence",cursor="hand2",command=self.Attendence_Window,font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 655,y= 230,width=200,height=35)
         
         # Help desk button  
@@ -170,6 +171,11 @@ class Face_Recoginition_System:
     def Face_Recognition_Window(self):
         self.new_window = Toplevel(self.root)
         self.app = Face_Recognition(self.new_window)
+        
+    # Making the Attendence button 
+    def Attendence_Window(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Attendence(self.new_window)
         
 
         
