@@ -95,14 +95,14 @@ class Face_Recoginition_System:
         b1_2.place(x= 655,y= 230,width=200,height=35)
         
         # Help desk button  
-        img8 = Image.open(r"Project_Images\help desk.jpg")
+        img8 = Image.open(r"Project_Images\chatbot_1.jpg")
         img8 = img8.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_8 = ImageTk.PhotoImage(img8)
         
         b2 = Button(bg_img,image=self.photoimg_8,cursor="hand2")
         b2.place(x= 960,y= 50,width=200,height=180)
         
-        b1_2 = Button(bg_img,text="Help Desk",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
+        b1_2 = Button(bg_img,text="CHATBOT",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 960,y= 230,width=200,height=35)
         
         # Train face 
