@@ -25,6 +25,19 @@ class Attendence:
         self.root.geometry("1300x700+0+0")
         self.root.title("Manange Attendence System")
         
+        # making the text variables 
+        self.var_id = StringVar()
+        self.var_name = StringVar()
+        self.var_course = StringVar()
+        self.var_dep = StringVar()
+        self.var_div = StringVar()
+        self.var_roll = StringVar()
+        self.var_sem = StringVar()
+        self.var_dob = StringVar()
+        self.var_time = StringVar()
+        self.var_date = StringVar()
+        self.var_attend = StringVar()
+        
         # Adding the different images of the same size so we cpoy the code 
         # Added image no 1
         left_frame_img_1 = Image.open(r"Project_Images\Attendence_1.jpg")
@@ -78,77 +91,77 @@ class Attendence:
         studentId_label = Label(frame_1,text="StudentId:",font=("times new roman",12,"bold"),bg="white")
         studentId_label.grid(row=0,column=0,padx=10,pady=4)
         
-        studentId_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        studentId_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_id,font=("times new roman",12,"bold"))
         studentId_entry.grid(row=0,column=1,padx=10,pady=4)
         
         # 2 --> Student Name 
         studentName_label = Label(frame_1,text="Student Name:",font=("times new roman",12,"bold"),bg="white")
         studentName_label.grid(row=0,column=2,padx=10,pady=4)
         
-        StudentName_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        StudentName_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_name,font=("times new roman",12,"bold"))
         StudentName_entry.grid(row=0,column=3,padx=10,pady=4)
         
         # 3 --> current cousre 
         current_course_label = Label(frame_1,text="Current Course:",font=("times new roman",12,"bold"),bg="white")
         current_course_label.grid(row=1,column=0,padx=10,pady=4)
         
-        current_course_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        current_course_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_course,font=("times new roman",12,"bold"))
         current_course_entry.grid(row=1,column=1,padx=10,pady=4)
         
         # 4 --> Department 
         department_label = Label(frame_1,text="Department:",font=("times new roman",12,"bold"),bg="white")
         department_label.grid(row=1,column=2,padx=10,pady=4)
         
-        department_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        department_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_dep,font=("times new roman",12,"bold"))
         department_entry.grid(row=1,column=3,padx=10,pady=4)
         
         # 5 --> Division 
         division_label = Label(frame_1,text="Division:",font=("times new roman",12,"bold"),bg="white")
         division_label.grid(row=2,column=0,padx=10,pady=4)
         
-        division_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        division_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_div,font=("times new roman",12,"bold"))
         division_entry.grid(row=2,column=1,padx=10,pady=4)
         
         #  6 --> Roll No,. 
         roll_label = Label(frame_1,text="Roll No.:",font=("times new roman",12,"bold"),bg="white")
         roll_label.grid(row=2,column=2,padx=10,pady=4)
         
-        roll_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        roll_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_roll,font=("times new roman",12,"bold"))
         roll_entry.grid(row=2,column=3,padx=10,pady=4)
         
         # 7 --> Semester 
         Semester_label = Label(frame_1,text="Semester:",font=("times new roman",12,"bold"),bg="white")
         Semester_label.grid(row=3,column=0,padx=10,pady=4)
         
-        Semester_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        Semester_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_sem,font=("times new roman",12,"bold"))
         Semester_entry.grid(row=3,column=1,padx=10,pady=4)
         
         #  8 --> Date of birth
         dob_label = Label(frame_1,text="D.O.B.:",font=("times new roman",12,"bold"),bg="white")
         dob_label.grid(row=3,column=2,padx=10,pady=4)
         
-        dob_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        dob_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_dob,font=("times new roman",12,"bold"))
         dob_entry.grid(row=3,column=3,padx=10,pady=4)
         
         #  9 --> timing 
         timming_label = Label(frame_1,text="Timming:",font=("times new roman",12,"bold"),bg="white")
         timming_label.grid(row=4,column=0,padx=10,pady=4)
         
-        timming_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        timming_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_time,font=("times new roman",12,"bold"))
         timming_entry.grid(row=4,column=1,padx=10,pady=4)
         
         # Date
         year_label = Label(frame_1,text="Date:",font=("times new roman",12,"bold"),bg="white")
         year_label.grid(row=4,column=2,padx=10,pady=4)
         
-        year_entry = ttk.Entry(frame_1,width=18,font=("times new roman",12,"bold"))
+        year_entry = ttk.Entry(frame_1,width=18,textvariable=self.var_date,font=("times new roman",12,"bold"))
         year_entry.grid(row=4,column=3,padx=10,pady=4)
         
         # making the attendence label 
         attendence_label = Label(frame_1,text="Attendence Label:",font=("times new roman",12,"bold"),bg="white")
         attendence_label.grid(row=5,column=0,padx=10,pady=4)
         
-        attendence_label_combo = ttk.Combobox(frame_1,font=("times new roman",12,"bold"),width=14,state="readonly")
+        attendence_label_combo = ttk.Combobox(frame_1,font=("times new roman",12,"bold"),textvariable=self.var_attend,width=14,state="readonly")
         attendence_label_combo["values"] = ("Status",
                                   "Present",
                                   "Absent")
@@ -174,7 +187,7 @@ class Attendence:
         update_btn.grid(row=0,column=2,padx=12,pady=6)
         
         # Reset button 
-        reset_btn = Button(frame_2,text="Reset",width=12,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        reset_btn = Button(frame_2,text="Reset",command=self.reset_data,width=12,font=("times new roman",13,"bold"),bg="blue",fg="white")
         reset_btn.grid(row=0,column=3,padx=12,pady=6)
         
         # Making the right frane 
@@ -240,6 +253,7 @@ class Attendence:
         scroll_y.config(command=self.AttendenceReportTable.yview)
         
         self.AttendenceReportTable.pack(fill=BOTH,expand=1)
+        self.AttendenceReportTable.bind("<ButtonRelease>",self.get_cursor)
     
     #  ========================= FETCH DATA =====================================
     def fetchData(self,rows):
@@ -270,10 +284,10 @@ class Attendence:
             
     #  ===================================== EXPORT CSV ==========================
     def exportCsv(self):
-        
+    
         # check the table is fileld or not 
         try :
-            if len(mydata)<1:
+            if len(self.AttendenceReportTable.get_children())<1:
                 messagebox.showerror("Error","NO DATA FOUND TO EXPORT",parent=self.root)
                 return False
             
@@ -295,10 +309,39 @@ class Attendence:
         except Exception as es :
             messagebox.showerror("Error",f"Due to f{str(es)}",parent=self.root)
             
-       
+    # ==================== get cursor =====================
+    def get_cursor(self,event=""):
+        cursor_row = self.AttendenceReportTable.focus()
+        content = self.AttendenceReportTable.item(cursor_row)
+        rows = content['values']
+        self.var_id.set(rows[0])
+        self.var_name.set(rows[1])
+        self.var_course.set(rows[2])
+        self.var_dep.set(rows[3])
+        self.var_div.set(rows[4])
+        self.var_roll.set(rows[5])
+        self.var_sem.set(rows[6])
+        self.var_dob.set(rows[7])
+        self.var_time.set(rows[8])
+        self.var_date.set(rows[9])
+        self.var_attend.set(rows[10])
+        
+    # ======================= reset data ================
+    def reset_data(self):
+        self.var_id.set("")
+        self.var_name.set("")
+        self.var_course.set("")
+        self.var_dep.set("")
+        self.var_div.set("")
+        self.var_roll.set("")
+        self.var_sem.set("")
+        self.var_dob.set("")
+        self.var_time.set("")
+        self.var_date.set("")
+        self.var_attend.set("")
+        
        
 
-            
         
         
         
