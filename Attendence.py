@@ -313,7 +313,11 @@ class Attendence:
     def get_cursor(self,event=""):
         cursor_row = self.AttendenceReportTable.focus()
         content = self.AttendenceReportTable.item(cursor_row)
-        rows = content['values']
+        rows = content.get('values',[])
+        
+        if not rows or len(rows) < 11:
+            return
+        
         self.var_id.set(rows[0])
         self.var_name.set(rows[1])
         self.var_course.set(rows[2])
