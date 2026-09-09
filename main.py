@@ -7,7 +7,7 @@ import os              # Operating system directory
 from train import Train_Face
 from Face_Recognition import Face_Recognition
 from Attendence import Attendence
-
+from tkinter import messagebox
 # Making the class Face_Recogintion attendence system
 class Face_Recoginition_System: 
     
@@ -143,15 +143,26 @@ class Face_Recoginition_System:
         img12 = img12.resize((200,180),Image.Resampling.LANCZOS)
         self.photoimg_12 = ImageTk.PhotoImage(img12)
         
-        b2 = Button(bg_img,image=self.photoimg_12,cursor="hand2")
+        b2 = Button(bg_img,image=self.photoimg_12,cursor="hand2",command=self.exit_button)
         b2.place(x= 960,y= 295,width=200,height=180)
         
-        b1_2 = Button(bg_img,text="Exit",cursor="hand2",font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
+        b1_2 = Button(bg_img,text="Exit",cursor="hand2",command=self.exit_button,font=("times new roman",20,"bold"),bg = "darkblue",fg="white")
         b1_2.place(x= 960,y= 475,width=200,height=35)
         
     # function to open the direct image directory 
     def open_image(self):
         os.startfile("data")
+        
+    
+    # Making the exit method ====================
+    def exit_button(self):
+        exit_confirm = messagebox.askyesno("Info","Do You Want To Exit From This Project",parent=self.root)
+        
+        if exit_confirm :
+            self.root.destroy()
+        else:
+            return
+        
         
         
         # ====================================== BUTTONS FUNCTION ===========================================
