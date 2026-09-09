@@ -10,6 +10,11 @@ import numpy as np
 import os
 from time import strftime   # import the date and time 
 from datetime import datetime
+import csv
+from tkinter import filedialog
+
+# making global variable to acces the data from the csv file 
+mydata = []
 
 # Making the class Face_Recogintion attendence system
 class Attendence: 
@@ -157,7 +162,7 @@ class Attendence:
         
         # # Making the buttons in frame 2 
         # Import csv
-        importcsv_btn = Button(frame_2,text="Import csv",width=12,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        importcsv_btn = Button(frame_2,text="Import csv",command=self.importCsv,width=12,font=("times new roman",13,"bold"),bg="blue",fg="white")
         importcsv_btn.grid(row=0,column=0,padx=12,pady=6)
         
         # Export csv 
@@ -235,6 +240,36 @@ class Attendence:
         scroll_y.config(command=self.AttendenceReportTable.yview)
         
         self.AttendenceReportTable.pack(fill=BOTH,expand=1)
+    
+    #  ========================= FETCH DATA =====================================
+    def fetchData(self,rows):
+        
+        self.AttendenceReportTable.delete(* self.AttendenceReportTable.get_children())
+        
+        for i in rows:
+            self.AttendenceReportTable.insert("",END,values=i)
+            
+    # =============================== IMPORT CSV =================================  
+    def importCsv(self):
+        global mydata
+        fln = filedialog.askopenfilename(
+                initialdir=os.getcwd(),
+                title="Open CSV",
+                filetypes=[("CSV File", "*.csv"), ("All Files", "*.*")],
+                parent=self.root
+        )
+        
+        with open(fln) as myfile:
+            csvread = csv.reader(myfile,delimiter=",")
+            
+            for i in csvread:
+                mydata.append(i)
+                
+            self.fetchData(mydata)
+       
+       
+
+            
         
         
         
