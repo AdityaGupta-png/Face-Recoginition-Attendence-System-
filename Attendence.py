@@ -166,7 +166,7 @@ class Attendence:
         importcsv_btn.grid(row=0,column=0,padx=12,pady=6)
         
         # Export csv 
-        exportcsv_btn = Button(frame_2,text="Export csv",width=12,font=("times new roman",13,"bold"),bg="blue",fg="white")
+        exportcsv_btn = Button(frame_2,text="Export csv",command=self.exportCsv,width=12,font=("times new roman",13,"bold"),bg="blue",fg="white")
         exportcsv_btn.grid(row=0,column=1,padx=12,pady=6)
         
         #Update button
@@ -252,6 +252,7 @@ class Attendence:
     # =============================== IMPORT CSV =================================  
     def importCsv(self):
         global mydata
+        mydata.clear()  # reset before loading new file 
         fln = filedialog.askopenfilename(
                 initialdir=os.getcwd(),
                 title="Open CSV",
@@ -266,6 +267,34 @@ class Attendence:
                 mydata.append(i)
                 
             self.fetchData(mydata)
+            
+    #  ===================================== EXPORT CSV ==========================
+    def exportCsv(self):
+        
+        # check the table is fileld or not 
+        try :
+            if len(mydata)<1:
+                messagebox.showerror("Error","NO DATA FOUND TO EXPORT",parent=self.root)
+                return False
+            
+            fln = filedialog.asksaveasfilename(
+                initialdir=os.getcwd(),
+                title="Open CSV",
+                filetypes=[("CSV File", "*.csv"), ("All Files", "*.*")],
+                parent=self.root
+            )
+            
+            # write the data inside the another file 
+            with open(fln,mode='w',newline="") as myfile:
+                exp_write = csv.writer(myfile,delimiter=",")
+                
+                for i in mydata:
+                    exp_write.writerow(i)
+                messagebox.showinfo("Info","DATA EXPORTED SUCCESSFULLY!!!",parent=self.root)
+                
+        except Exception as es :
+            messagebox.showerror("Error",f"Due to f{str(es)}",parent=self.root)
+            
        
        
 
